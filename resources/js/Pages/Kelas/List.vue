@@ -66,11 +66,6 @@ const deleteKelas = async () => {
                                 >
                                     Aksi
                                 </th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                                >
-                                    Lihat Daftar
-                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
@@ -100,30 +95,6 @@ const deleteKelas = async () => {
                                     >
                                         Hapus
                                     </button>
-                                </td>
-                                <td
-                                    class="flex gap-5 whitespace-nowrap px-6 py-4 text-sm text-gray-900"
-                                >
-                                    <a
-                                        :href="route('gbk.list', kelas.id)"
-                                        class="text-blue-600 hover:text-blue-800"
-                                    >
-                                        Guru
-                                    </a>
-                                    |
-                                    <a
-                                        :href="route('sbk.list', kelas.id)"
-                                        class="text-green-600 hover:text-green-800"
-                                    >
-                                        Siswa
-                                    </a>
-                                    |
-                                    <a
-                                        :href="route('kgs.list', kelas.id)"
-                                        class="text-blue-600 hover:text-blue-800"
-                                    >
-                                        Guru Siswa
-                                    </a>
                                 </td>
                             </tr>
                         </tbody>

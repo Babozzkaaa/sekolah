@@ -74,9 +74,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('/delete/{id}', [KelasSiswaController::class, 'delete'])->name('delete');
     });
 
-    Route::get('/gbk/{id_kelas}', [KelasGSController::class, 'getGuruByKelas'])->name('gbk.list');
-    Route::get('/sbk/{id_kelas}', [KelasGSController::class, 'getSiswaByKelas'])->name('sbk.list');
-    Route::get('/kgs/{id_kelas}', [KelasGSController::class, 'getKelasGuruSiswa'])->name('kgs.list');
+    Route::get('/gbk', [KelasGSController::class, 'getGuruByKelas'])->name('gbk.list');
+    // Route::get('/gbk/{id_kelas}', [KelasGSController::class, 'getGuruByKelas'])->name('gbk.list');
+    Route::get('/sbk', [KelasGSController::class, 'getSiswaByKelas'])->name('sbk.list');
+    Route::get('/kgs', [KelasGSController::class, 'getKelasGuruSiswa'])->name('kgs.list');
+    // Route::get('/sbk/{id_kelas}', [KelasGSController::class, 'getSiswaByKelas'])->name('sbk.list');
+    // Route::get('/kgs/{id_kelas}', [KelasGSController::class, 'getKelasGuruSiswa'])->name('kgs.list');
 
 });
 

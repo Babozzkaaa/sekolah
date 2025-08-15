@@ -1,6 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 </script>
 
 <template>
@@ -19,11 +19,42 @@ import { Head } from '@inertiajs/vue3';
                     <div class="p-6 text-gray-900">
                         Gunakan Mode Desktop untuk melihat route lengkap (route
                         berada di navbar), <br />
-                        untuk melihat List Siswa berdasarkan kelasnya, List Guru
-                        berdasarkan Kelas, dan List Guru Siswa di Suatu Kelas
-                        dapat menuju ke halaman Kelas. <br />
                         Pastikan sudah menjalankan "php artisan db:seed" dan isi
                         data kelas guru dan kelas siswa secara manual
+                    </div>
+                    <div class="p-6 text-gray-900">
+                        untuk melihat route guru berdasarkan kelas
+                        <button
+                            class="rounded-md border-2 bg-blue-600 px-3 py-2"
+                        >
+                            <Link :href="route('gbk.list')">
+                                <span class="font-bold text-white"> Guru </span>
+                            </Link>
+                        </button>
+                        <br />
+                        untuk melihat route siswa berdasarkan kelas
+
+                        <button
+                            class="rounded-md border-2 bg-blue-600 px-3 py-2"
+                        >
+                            <Link :href="route('sbk.list')">
+                                <span class="font-bold text-white">
+                                    Siswa
+                                </span>
+                            </Link>
+                        </button>
+                        <br />
+                        untuk melihat route guru dan siswa berdasarkan kelas
+                        <button
+                            class="rounded-md border-2 bg-blue-600 px-3 py-2"
+                        >
+                            <Link :href="route('kgs.list')">
+                                <span class="font-bold text-white">
+                                    Guru Siswa
+                                </span>
+                            </Link>
+                        </button>
+                        <br />
                     </div>
                 </div>
             </div>

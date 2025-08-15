@@ -25,7 +25,12 @@ class KelasGuruController extends Controller
 
     public function create() {
         $kelas = Kelas::all();
-        $guru = Guru::all();
+        // $guru = Guru::all();
+        $guru = Guru::whereNotExists(function ($query) {
+            $query->select(\DB::raw(1))
+                ->from('kelas_guru')
+                ->whereRaw('kelas_guru.id_guru = gurus.id');
+        })->get();
 
         return Inertia::render('KelasGuru/Create', [
             'kelas' => $kelas,
@@ -50,7 +55,12 @@ class KelasGuruController extends Controller
     public function edit($id) {
         $kelasguru = KelasGuru::findOrFail($id);
         $kelas = Kelas::all();
-        $guru = Guru::all();
+        // $guru = Guru::all();
+        $guru = Guru::whereNotExists(function ($query) {
+            $query->select(\DB::raw(1))
+                ->from('kelas_guru')
+                ->whereRaw('kelas_guru.id_guru = gurus.id');
+        })->orWhere('id', $kelasguru->id_guru)->get();
 
         return Inertia::render('KelasGuru/Edit', [
             'kelasguru' => $kelasguru,

@@ -6,8 +6,18 @@ import { ref } from 'vue';
 const props = defineProps({
     kelassiswa: Object,
     kelas: Object,
-    guru: Object,
+    siswa: Object,
 });
+
+const satu = (index) => {
+    if (index == 0) {
+        return true;
+    }
+    return (
+        props.kelassiswa.data[index].kelas.id !==
+        props.kelassiswa.data[index - 1].kelas.id
+    );
+};
 </script>
 
 <template>
@@ -33,17 +43,29 @@ const props = defineProps({
                                 >
                                     Siswa
                                 </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                                >
+                                    Kelas
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <tr
-                                v-for="kelassiswa in kelassiswa.data"
+                                v-for="(kelassiswa, index) in kelassiswa.data"
                                 :key="kelassiswa.id"
                             >
                                 <td
                                     class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
                                 >
                                     {{ kelassiswa.siswa.nama }}
+                                </td>
+                                <td
+                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
+                                >
+                                    <span v-if="satu(index)">
+                                        {{ kelassiswa.kelas.nama }}
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>

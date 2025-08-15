@@ -5,9 +5,17 @@ import { ref } from 'vue';
 
 const props = defineProps({
     kelassiswa: Object,
+    kelasgs: Object,
     kelasguru: Object,
     kelas: Object,
 });
+
+// const satu = (index) => {
+//     if (index == 0) {
+//         return true;
+//     }
+//     return props.kelasgs.data[index].id !== props.kelasgs.data[index - 1].id;
+// };
 </script>
 
 <template>
@@ -38,10 +46,50 @@ const props = defineProps({
                                 >
                                     Guru
                                 </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                                >
+                                    Kelas
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <tr
+                                v-for="(kelasgs, i) in kelasgs.data"
+                                :key="kelasgs.nama_kelas"
+                            >
+                                <td
+                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
+                                >
+                                    <!-- <div
+                                >
+                                    {{ kelasgs.siswa }}
+                                </div> -->
+                                    <div
+                                        v-for="(siswa, is) in kelasgs.siswa"
+                                        :key="is"
+                                    >
+                                        {{ siswa }}
+                                    </div>
+                                </td>
+                                <td
+                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
+                                >
+                                    <div
+                                        v-for="(guru, ig) in kelasgs.guru"
+                                        :key="ig"
+                                    >
+                                        {{ guru }}
+                                    </div>
+                                </td>
+                                <td
+                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
+                                >
+                                    {{ kelasgs.kelas }}
+                                </td>
+                            </tr>
+
+                            <!-- 
                                 v-for="index in kelassiswa.data.length >
                                 kelasguru.data.length
                                     ? kelassiswa.data.length
@@ -64,7 +112,7 @@ const props = defineProps({
                                         '-'
                                     }}
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -75,15 +123,15 @@ const props = defineProps({
                     <div class="flex items-center justify-between">
                         <div class="flex flex-1 justify-between sm:hidden">
                             <a
-                                v-if="kelassiswa.prev_page_url"
-                                :href="kelassiswa.prev_page_url"
+                                v-if="kelasgs.prev_page_url"
+                                :href="kelasgs.prev_page_url"
                                 class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
                                 Previous
                             </a>
                             <a
-                                v-if="kelassiswa.next_page_url"
-                                :href="kelassiswa.next_page_url"
+                                v-if="kelasgs.next_page_url"
+                                :href="kelasgs.next_page_url"
                                 class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
                                 Next
@@ -94,9 +142,9 @@ const props = defineProps({
                         >
                             <div>
                                 <p class="text-sm text-gray-700">
-                                    Showing {{ kelassiswa.from }} to
-                                    {{ kelassiswa.to }} of
-                                    {{ kelassiswa.total }} results
+                                    Showing {{ kelasgs.from }} to
+                                    {{ kelasgs.to }} of
+                                    {{ kelasgs.total }} results
                                 </p>
                             </div>
                             <div>
@@ -104,7 +152,7 @@ const props = defineProps({
                                     class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
                                 >
                                     <a
-                                        v-for="link in kelassiswa.links"
+                                        v-for="link in kelasgs.links"
                                         :key="link.label"
                                         :href="link.url"
                                         v-html="link.label"

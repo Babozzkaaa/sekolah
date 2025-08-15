@@ -8,6 +8,16 @@ const props = defineProps({
     kelas: Object,
     guru: Object,
 });
+
+const satu = (index) => {
+    if (index == 0) {
+        return true;
+    }
+    return (
+        props.kelasguru.data[index].kelas.id !==
+        props.kelasguru.data[index - 1].kelas.id
+    );
+};
 </script>
 
 <template>
@@ -33,17 +43,29 @@ const props = defineProps({
                                 >
                                     Guru
                                 </th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
+                                >
+                                    Kelas
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
                             <tr
-                                v-for="kelasguru in kelasguru.data"
+                                v-for="(kelasguru, index) in kelasguru.data"
                                 :key="kelasguru.id"
                             >
                                 <td
                                     class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
                                 >
                                     {{ kelasguru.guru.nama }}
+                                </td>
+                                <td
+                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
+                                >
+                                    <span v-if="satu(index)">
+                                        {{ kelasguru.kelas.nama }}
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>
