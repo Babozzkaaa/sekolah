@@ -90,6 +90,16 @@ const showingNavigationDropdown = ref(false);
                                     Kelas Siswa
                                 </NavLink>
                             </div>
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
+                            >
+                                <NavLink
+                                    :href="route('ot.list')"
+                                    :active="route().current('ot.list')"
+                                >
+                                    Orang Tua
+                                </NavLink>
+                            </div>
                         </div>
 
                         <div class="hidden sm:ms-6 sm:flex sm:items-center">

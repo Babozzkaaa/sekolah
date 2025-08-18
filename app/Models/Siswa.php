@@ -16,4 +16,10 @@ class Siswa extends Model
         'jenis_kelamin',
         'tanggal_lahir'
     ];
+    public function orangTua() {
+        // return $this->belongsTo(OrangTua::class, 'id');
+        return $this->hasMany(OrangTua::class, 'id_siswa');
+        // return $this->hasMany(OrangTua::class, 'id_siswa');
+        // return $this->hasOne(OrangTua::class, 'id_siswa');
+    }
 }

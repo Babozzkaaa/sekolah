@@ -5,6 +5,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\KelasGSController;
 use App\Http\Controllers\KelasGuruController;
 use App\Http\Controllers\KelasSiswaController;
+use App\Http\Controllers\OrangTuaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SiswaController;
 use Illuminate\Foundation\Application;
@@ -80,6 +81,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/kgs', [KelasGSController::class, 'getKelasGuruSiswa'])->name('kgs.list');
     // Route::get('/sbk/{id_kelas}', [KelasGSController::class, 'getSiswaByKelas'])->name('sbk.list');
     // Route::get('/kgs/{id_kelas}', [KelasGSController::class, 'getKelasGuruSiswa'])->name('kgs.list');
+
+    Route::prefix('orang-tua')->name('ot.')->group(function () {
+        Route::get('/', [OrangTuaController::class, 'getOT'])->name('list');
+        Route::get('/create', [OrangTuaController::class, 'create'])->name('create');
+        Route::post('/create', [OrangTuaController::class, 'createData'])->name('createData');
+        Route::get('/edit/{id}', [OrangTuaController::class, 'edit'])->name('edit');
+        Route::put('/edit/{id}', [OrangTuaController::class, 'editData'])->name('editData');
+        Route::delete('/delete/{id}', [OrangTuaController::class, 'delete'])->name('delete');
+    });
 
 });
 

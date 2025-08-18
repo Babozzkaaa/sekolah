@@ -4,26 +4,25 @@ import { router } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const props = defineProps({
-    siswa: Object,
-    orangTua: Object,
+    orang_tua: Object,
 });
 
 const showDeleteModal = ref(false);
-const siswaToDelete = ref(null);
+const otToDelete = ref(null);
 
-const confirmDelete = (siswa) => {
-    siswaToDelete.value = siswa;
+const confirmDelete = (orang_tua) => {
+    otToDelete.value = orang_tua;
     showDeleteModal.value = true;
 };
 
-const deleteSiswa = async () => {
-    if (!siswaToDelete.value) return;
+const deleteOT = async () => {
+    if (!otToDelete.value) return;
 
     try {
-        await router.delete(route('siswa.delete', siswaToDelete.value.id));
+        await router.delete(route('ot.delete', otToDelete.value.id));
         showDeleteModal.value = false;
     } catch (error) {
-        console.error('Error mendelete siswa:', error);
+        console.error('Error mendelete ot:', error);
     }
 };
 </script>
@@ -36,20 +35,20 @@ const deleteSiswa = async () => {
                     class="mx-3 mb-8 flex items-center justify-between sm:px-3"
                 >
                     <h1 class="text-2xl font-semibold text-gray-900">
-                        Daftar Siswa
+                        Daftar orang tua
                     </h1>
                     <a
-                        :href="route('siswa.create')"
+                        :href="route('ot.create')"
                         class="w-34 mb-4 inline-block rounded-md border border-transparent bg-blue-600 px-2 py-2 text-white hover:bg-blue-800"
                     >
-                        + Tambah Siswa
+                        + Tambah orang tua
                     </a>
                 </div>
 
                 <div
                     class="overflow-x-auto rounded-lg border border-gray-200 bg-white p-6"
                 >
-                    <table class="w-full divide-gray-200 overflow-x-auto">
+                    <table class="w-full divide-gray-200 overflow-hidden">
                         <thead>
                             <tr>
                                 <th
@@ -60,22 +59,7 @@ const deleteSiswa = async () => {
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                                 >
-                                    NIS
-                                </th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                                >
-                                    Jenis Kelamin
-                                </th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                                >
-                                    Tanggal Lahir
-                                </th>
-                                <th
-                                    class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
-                                >
-                                    Orang Tua
+                                    Siswa
                                 </th>
                                 <th
                                     class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
@@ -85,51 +69,31 @@ const deleteSiswa = async () => {
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-200">
-                            <tr v-for="siswa in siswa.data" :key="siswa.id">
+                            <tr
+                                v-for="orang_tua in orang_tua.data"
+                                :key="orang_tua.id"
+                            >
                                 <td
                                     class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
                                 >
-                                    {{ siswa.nama }}
+                                    {{ orang_tua.nama }}
                                 </td>
                                 <td
                                     class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
                                 >
-                                    {{ siswa.nis }}
-                                </td>
-                                <td
-                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
-                                >
-                                    <span v-if="siswa.jenis_kelamin === 'L'">
-                                        Laki-laki
-                                    </span>
-                                    <span
-                                        v-else-if="siswa.jenis_kelamin === 'P'"
-                                    >
-                                        Perempuan
-                                    </span>
-                                </td>
-                                <td
-                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
-                                >
-                                    {{ siswa.tanggal_lahir }}
-                                </td>
-                                <td
-                                    class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
-                                >
-                                    {{ siswa.orang_tua_nama || '-' }}
-                                    <!-- {{ orangTua.nama || '-' }} -->
+                                    {{ orang_tua.siswa.nama }}
                                 </td>
                                 <td
                                     class="whitespace-nowrap px-6 py-4 text-sm text-gray-900"
                                 >
                                     <a
-                                        :href="route('siswa.edit', siswa.id)"
+                                        :href="route('ot.edit', orang_tua.id)"
                                         class="text-blue-600 hover:text-blue-800"
                                     >
                                         Edit
                                     </a>
                                     <button
-                                        @click="confirmDelete(siswa)"
+                                        @click="confirmDelete(orang_tua)"
                                         class="ml-4 text-red-600 hover:text-red-800"
                                     >
                                         Hapus
@@ -146,15 +110,15 @@ const deleteSiswa = async () => {
                     <div class="flex items-center justify-between">
                         <div class="flex flex-1 justify-between sm:hidden">
                             <a
-                                v-if="siswa.prev_page_url"
-                                :href="siswa.prev_page_url"
+                                v-if="orang_tua.prev_page_url"
+                                :href="orang_tua.prev_page_url"
                                 class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
                                 Previous
                             </a>
                             <a
-                                v-if="siswa.next_page_url"
-                                :href="siswa.next_page_url"
+                                v-if="orang_tua.next_page_url"
+                                :href="orang_tua.next_page_url"
                                 class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
                             >
                                 Next
@@ -165,8 +129,9 @@ const deleteSiswa = async () => {
                         >
                             <div>
                                 <p class="text-sm text-gray-700">
-                                    Showing {{ siswa.from }} to
-                                    {{ siswa.to }} of {{ siswa.total }} results
+                                    Showing {{ orang_tua.from }} to
+                                    {{ orang_tua.to }} of
+                                    {{ orang_tua.torang_tuaal }} results
                                 </p>
                             </div>
                             <div>
@@ -174,7 +139,7 @@ const deleteSiswa = async () => {
                                     class="relative z-0 inline-flex -space-x-px rounded-md shadow-sm"
                                 >
                                     <a
-                                        v-for="link in siswa.links"
+                                        v-for="link in orang_tua.links"
                                         :key="link.label"
                                         :href="link.url"
                                         v-html="link.label"
@@ -217,12 +182,12 @@ const deleteSiswa = async () => {
                             </svg>
                         </div>
                         <h3 class="mt-2 text-lg font-medium text-gray-900">
-                            Hapus Siswa
+                            Hapus orang tua
                         </h3>
                         <div class="mt-2 px-7 py-3">
                             <p class="text-sm text-gray-500">
-                                Apakah Anda yakin ingin menghapus Siswa "{{
-                                    siswaToDelete?.nama
+                                Apakah Anda yakin ingin menghapus orang tua "{{
+                                    otToDelete?.nama
                                 }}"? Tindakan ini tidak dapat dibatalkan.
                             </p>
                         </div>
@@ -234,7 +199,7 @@ const deleteSiswa = async () => {
                                 Batal
                             </button>
                             <button
-                                @click="deleteSiswa"
+                                @click="deleteOT"
                                 class="rounded-md bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                             >
                                 Hapus
